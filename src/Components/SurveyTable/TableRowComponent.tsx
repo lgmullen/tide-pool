@@ -9,11 +9,11 @@ interface IProps {
 }
 export const TableRowComponent: FunctionComponent<IProps> = ({ survey }) => (
   <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-    <StyledTableCell>{survey.entry_id}</StyledTableCell>
-    <StyledTableCell>{survey.platform_id}</StyledTableCell>
+    <StyledTableCell>{survey.entryId}</StyledTableCell>
+    <StyledTableCell>{survey.platformId}</StyledTableCell>
     <StyledTableCell>{survey.created}</StyledTableCell>
     <StyledTableCell>{survey.year}</StyledTableCell>
-    <StyledTableCell>{survey.total_area}</StyledTableCell>
+    <StyledTableCell>{survey.totalArea}</StyledTableCell>
     <StyledTableCell>
       <IconButton
         size='small'

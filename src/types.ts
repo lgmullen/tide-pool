@@ -1,4 +1,4 @@
-export interface Survey {
+export interface SurveyData {
   center_x: string;
   center_y: string;
   chief: string;
@@ -27,6 +27,21 @@ export interface Survey {
   survey_id: string;
   total_area: string;
   track_length: string;
+  url: string;
+  west: string;
+  year: string;
+}
+
+export interface Survey {
+  centerX: string;
+  centerY: string;
+  created: string;
+  east: string;
+  entryId: string;
+  north: string;
+  platformId: string;
+  south: string;
+  totalArea: string;
   url: string;
   west: string;
   year: string;

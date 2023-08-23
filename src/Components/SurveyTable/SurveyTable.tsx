@@ -30,11 +30,11 @@ type TableColumn = {
 };
 
 const columns: TableColumn[] = [
-  { field: 'entry_id', name: 'Entry Id' },
-  { field: 'device_make', name: 'Ship Name' },
+  { field: 'entryId', name: 'Entry Id' },
+  { field: 'platformId', name: 'Ship Name' },
   { field: 'created', name: 'Created' },
   { field: 'year', name: 'Year' },
-  { field: 'total_area', name: 'Total Area' },
+  { field: 'totalArea', name: 'Total Area' },
   { field: 'url', name: 'URL' },
 ];
 
@@ -55,8 +55,8 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
     if (debouncedQuery !== '') {
       return surveys.filter((survey) => {
         return (
-          survey.platform_id.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
-          survey.entry_id.toLowerCase().includes(debouncedQuery.toLowerCase())
+          survey.platformId.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+          survey.entryId.toLowerCase().includes(debouncedQuery.toLowerCase())
         );
       });
     } else {
@@ -131,7 +131,7 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
             </TableHead>
             <TableBody>
               {visibleRows.map((survey) => (
-                <TableRowComponent survey={survey} key={`${survey.entry_id}`} />
+                <TableRowComponent survey={survey} key={`${survey.entryId}`} />
               ))}
             </TableBody>
             <TablePagination
