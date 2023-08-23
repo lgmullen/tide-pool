@@ -46,7 +46,7 @@ export const TotalSurveyAreaView: FunctionComponent<IProps> = ({
         ref={mapRef}
         onMove={(evt) => setViewState(evt.viewState)}
         {...viewState}
-        mapboxAccessToken='pk.eyJ1IjoiamFja2JvdyIsImEiOiJjbGxtcHB2bTYwMmNrM2Vtd251OTRjZmtsIn0.qr4C_pjCBPpf2b1r2yBzdw'
+        mapboxAccessToken={import.meta.env.VITE_MAPBOX_API_KEY}
         initialViewState={{
           longitude: viewState?.longitude,
           latitude: viewState?.latitude,
