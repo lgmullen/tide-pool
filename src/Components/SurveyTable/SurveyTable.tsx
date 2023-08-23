@@ -17,7 +17,13 @@ import {
 } from '@mui/material';
 import { useDebounce } from '@uidotdev/usehooks';
 
-import { getTotalArea, handleFlyTo } from '@/utils';
+import {
+  changeHandler,
+  getTotalArea,
+  handleChangePage,
+  handleChangeRowsPerPage,
+  handleFlyTo,
+} from '@/utils';
 import { ChangeEvent, FunctionComponent, useMemo, useRef, useState } from 'react';
 import { TotalSurveyAreaView } from '../TotalAreaSurveyView';
 import { TableRowComponent } from './TableRowComponent';
@@ -39,11 +45,6 @@ const columns: TableColumn[] = [
   { field: 'totalArea', name: 'Total Area' },
   { field: 'url', name: 'URL' },
 ];
-
-export const StyledTableCell = styled(TableCell)({
-  width: '150px',
-  height: '80px',
-});
 
 export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
   const [isSortingAscending, setSortingAscending] = useState(false);
@@ -83,21 +84,6 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
     [page, rowsPerPage, filteredSurveys, isSortingAscending],
   );
 
-  const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
-  };
-
-  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   const handleChangeMapMarker = (survey: Survey) => {
     handleFlyTo(survey.centerX, survey.centerY, mapRef);
   };
@@ -109,7 +95,7 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
       <Grid item xs={8}>
         <TableContainer component={Paper}>
           <TextField
-            onChange={changeHandler}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => changeHandler(event, setQuery)}
             id='search'
             type='search'
             aria-label='Search'
@@ -158,8 +144,10 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
               count={filteredSurveys.length}
               rowsPerPage={rowsPerPage}
               page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
+              onPageChange={(event, pageNumber) => handleChangePage(event, pageNumber, setPage)}
+              onRowsPerPageChange={(event) =>
+                handleChangeRowsPerPage(event, setRowsPerPage, setPage)
+              }
             />
           </Table>
         </TableContainer>
@@ -175,3 +163,8 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
     </Grid>
   );
 };
+
+export const StyledTableCell = styled(TableCell)({
+  width: '150px',
+  height: '80px',
+});
