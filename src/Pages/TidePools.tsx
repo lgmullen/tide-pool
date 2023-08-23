@@ -1,3 +1,5 @@
+import { Header } from '@/Components/Header';
+import { SurveyTable } from '@/Components/SurveyTable/SurveyTable';
 import { getTidePoolsData } from '@/DataLayer/tidePools';
 import { CircularProgress } from '@mui/material';
 import { FunctionComponent } from 'react';
@@ -21,5 +23,10 @@ export const TidePools: FunctionComponent = () => {
       />
     );
   if (error) return <div>Request Failed</div>;
-  return <div></div>;
+  return (
+    <div>
+      <Header />
+      <SurveyTable surveys={data} />
+    </div>
+  );
 };
