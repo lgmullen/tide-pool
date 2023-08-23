@@ -52,7 +52,7 @@ export const TotalSurveyAreaView: FunctionComponent<IProps> = ({
           latitude: viewState?.latitude,
           zoom: 1,
         }}
-        style={{ width: 600, height: 400 }}
+        style={{ width: 500, height: 400 }}
         mapStyle='mapbox://styles/mapbox/streets-v9'
       />
     </Grid>
