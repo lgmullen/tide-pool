@@ -7,21 +7,19 @@ export const getTidePoolsData = async () => {
 
 export const formatTidePoolsData = (data: SurveyData[]) => {
   return data.map((survey) => {
-    const { north, east, south, west, year, created } = survey;
     return {
       centerX: survey.center_x,
       centerY: survey.center_y,
       entryId: survey.entry_id,
-      shipName: survey.platform_id,
-      totalArea: survey.total_area ?? 0,
+      totalArea: survey.total_area,
       url: survey.url,
       platformId: survey.platform_id,
-      created,
-      year,
-      north,
-      east,
-      south,
-      west,
+      created: survey.created,
+      year: survey.year,
+      north: survey.north,
+      east: survey.east,
+      south: survey.west,
+      west: survey.west,
     };
   });
 };

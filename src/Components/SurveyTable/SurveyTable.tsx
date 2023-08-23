@@ -1,4 +1,4 @@
-import { Survey } from '@/types';
+import { Survey, SurveyData } from '@/types';
 import { ArrowDownward, ArrowUpward, Search } from '@mui/icons-material';
 import {
   Grid,
@@ -18,7 +18,9 @@ import {
 import { useDebounce } from '@uidotdev/usehooks';
 
 import { ChangeEvent, FunctionComponent, useMemo, useState } from 'react';
+import { TotalSurveyAreaView } from '../TotalAreaSurveyView';
 import { TableRowComponent } from './TableRowComponent';
+import { getTotalArea } from '@/utils';
 
 interface IProps {
   surveys: Survey[];
@@ -89,6 +91,9 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
     setPage(0);
   };
 
+  const totalArea = getTotalArea(surveys);
+  const currentTotalArea = getTotalArea(filteredSurveys);
+
   return (
     <Grid container spacing={2} padding={4}>
       <Grid item xs={8}>
@@ -145,6 +150,11 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
           </Table>
         </TableContainer>
       </Grid>
+      <TotalSurveyAreaView
+        totalArea={totalArea}
+        currentTotalArea={currentTotalArea}
+        surveys={surveys}
+      />
     </Grid>
   );
 };
