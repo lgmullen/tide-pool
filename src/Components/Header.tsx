@@ -7,9 +7,8 @@ export const Header: FunctionComponent = () => {
       style={{
         backgroundColor: 'rgb(2 7 35 )',
         color: 'white',
-        padding: 4,
-        marginBottom: 16,
         fontWeight: 'bold',
+        padding: 24,
       }}
     >
       <Typography align='left' variant='h2' color={'rgb(26 255 157)'}>

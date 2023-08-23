@@ -122,7 +122,7 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
               ),
             }}
           />
-          <Table sx={{ minWidth: 650, maxHeight: 800 }} aria-label='cruise table'>
+          <Table aria-label='cruise table'>
             <TableHead>
               <TableRow>
                 {columns.map((column) =>

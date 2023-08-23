@@ -1,5 +1,5 @@
 import type { Survey } from '@/types';
-import { Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { FunctionComponent } from 'react';
 import Map from 'react-map-gl';
 interface IProps {
@@ -33,10 +33,15 @@ export const TotalSurveyAreaView: FunctionComponent<IProps> = ({
     return null;
   }
 
+  // Add mapbox Access token from
+  // https://docs.mapbox.com/help/getting-started/access-tokens/ in order to view map
+
   return (
     <Grid item xs={4}>
-      <Typography variant='h5'>Total Area of all cruises: {totalArea}</Typography>
-      <Typography variant='h5'>Total Area of current cruises: {currentTotalArea}</Typography>
+      <Box sx={{ marginBottom: 4 }}>
+        <Typography variant='h5'>Total Area of all cruises: {totalArea}</Typography>
+        <Typography variant='h5'>Total Area of all viewed cruises: {currentTotalArea}</Typography>
+      </Box>
       <Map
         ref={mapRef}
         onMove={(evt) => setViewState(evt.viewState)}
