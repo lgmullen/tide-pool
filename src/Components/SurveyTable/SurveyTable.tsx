@@ -62,25 +62,22 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
   const debouncedQuery = useDebounce<string>(query, 500);
 
   const filteredSurveys = useMemo(() => {
+    const updatedSurveys = surveys?.sort((a, b) =>
+      isSortingAscending ? Number(a.year) - Number(b.year) : Number(b.year) - Number(a.year),
+    );
     if (debouncedQuery !== '') {
-      return surveys.filter((survey) => {
+      return updatedSurveys.filter((survey) => {
         return (
           survey.platformId.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
           survey.entryId.toLowerCase().includes(debouncedQuery.toLowerCase())
         );
       });
-    } else {
-      return surveys;
     }
-  }, [debouncedQuery]);
+    return updatedSurveys;
+  }, [debouncedQuery, isSortingAscending]);
 
   const visibleRows = useMemo(
-    () =>
-      filteredSurveys
-        ?.sort((a, b) =>
-          isSortingAscending ? Number(a.year) - Number(b.year) : Number(b.year) - Number(a.year),
-        )
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+    () => filteredSurveys.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
     [page, rowsPerPage, filteredSurveys, isSortingAscending],
   );
 

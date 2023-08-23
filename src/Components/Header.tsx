@@ -12,7 +12,7 @@ export const Header: FunctionComponent = () => {
       }}
     >
       <Typography align='left' variant='h2' color={'rgb(26 255 157)'}>
-        tide pools
+        Tide Pools
       </Typography>
     </div>
   );

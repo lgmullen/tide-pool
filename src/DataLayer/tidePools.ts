@@ -2,7 +2,9 @@ import { SurveyData } from '@/types';
 
 export const getTidePoolsData = async () => {
   const res = await fetch('https://www.gmrt.org/services/GmrtCruises.php');
-  return res.json();
+  const formattedSurveyData = formatTidePoolsData(await res.json());
+
+  return formattedSurveyData;
 };
 
 export const formatTidePoolsData = (data: SurveyData[]) => {
