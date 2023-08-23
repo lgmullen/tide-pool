@@ -1,20 +1,25 @@
+import '@/index.css';
+import { store } from '@/store';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { store } from '@/store';
-import '@/index.css';
+import { TidePools } from './Pages/TidePools';
 
 const MainContext = React.createContext({});
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
     <Provider store={store}>
       <BrowserRouter>
         <MainContext.Provider value={{}}>
-          <h1>Tide poolz go here</h1>
+          <TidePools/>
         </MainContext.Provider>
       </BrowserRouter>
     </Provider>
+    </QueryClientProvider>
   </React.StrictMode>,
 );
