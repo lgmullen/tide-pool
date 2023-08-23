@@ -135,17 +135,19 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
                   handleChangeMapMarker={handleChangeMapMarker}
                 />
               ))}
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25]}
+                  count={filteredSurveys.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={(event, pageNumber) => handleChangePage(event, pageNumber, setPage)}
+                  onRowsPerPageChange={(event) =>
+                    handleChangeRowsPerPage(event, setRowsPerPage, setPage)
+                  }
+                />
+              </TableRow>
             </TableBody>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
-              count={filteredSurveys.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={(event, pageNumber) => handleChangePage(event, pageNumber, setPage)}
-              onRowsPerPageChange={(event) =>
-                handleChangeRowsPerPage(event, setRowsPerPage, setPage)
-              }
-            />
           </Table>
         </TableContainer>
       </Grid>

@@ -23,11 +23,11 @@ The project requires Node 18 to be installed on your local machine, refer to npm
 
 2. API Key Setup
 
-   To access the map feature in this project, you need an API key. Follow these steps to set it up:
+   To access the map feature in Tide Pools, you need an API key. Follow these steps to set it up:
 
    1. Sign up or log in to your account at [MapBox](https://account.mapbox.com/access-tokens/).
    2. Navigate to the API section.
-   3. Generate a new API key for this project.
+   3. Generate a new API key.
    4. Copy the generated API key.
    5. Insert the API key into the .env file using the following format:
 
