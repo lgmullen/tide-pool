@@ -6,11 +6,7 @@ import { FunctionComponent } from 'react';
 import { useQuery } from 'react-query';
 
 export const TidePools: FunctionComponent = () => {
-  const { data, error, isLoading } = useQuery('tidePoolsData', getTidePoolsData, {
-    onSuccess: (data) => {
-      console.log('Query completed!', data);
-    },
-  });
+  const { data, error, isLoading } = useQuery('tidePoolsData', getTidePoolsData);
 
   if (isLoading)
     return (

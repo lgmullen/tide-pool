@@ -8,8 +8,8 @@ export const getTidePoolsData = async () => {
 export const formatTidePoolsData = (data: SurveyData[]) => {
   return data.map((survey) => {
     return {
-      centerX: survey.center_x,
-      centerY: survey.center_y,
+      centerX: parseInt(survey.center_x),
+      centerY: parseInt(survey.center_y),
       entryId: survey.entry_id,
       totalArea: survey.total_area,
       url: survey.url,

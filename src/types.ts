@@ -33,8 +33,8 @@ export interface SurveyData {
 }
 
 export interface Survey {
-  centerX: string;
-  centerY: string;
+  centerX: number;
+  centerY: number;
   created: string;
   east: string;
   entryId: string;

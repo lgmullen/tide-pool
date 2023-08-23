@@ -1,4 +1,4 @@
-import { Survey, SurveyData } from '@/types';
+import { Survey } from '@/types';
 import { ArrowDownward, ArrowUpward, Search } from '@mui/icons-material';
 import {
   Grid,
@@ -17,10 +17,10 @@ import {
 } from '@mui/material';
 import { useDebounce } from '@uidotdev/usehooks';
 
-import { ChangeEvent, FunctionComponent, useMemo, useState } from 'react';
+import { getTotalArea, handleFlyTo } from '@/utils';
+import { ChangeEvent, FunctionComponent, useMemo, useRef, useState } from 'react';
 import { TotalSurveyAreaView } from '../TotalAreaSurveyView';
 import { TableRowComponent } from './TableRowComponent';
-import { getTotalArea } from '@/utils';
 
 interface IProps {
   surveys: Survey[];
@@ -50,6 +50,13 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
   const [query, setQuery] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
+  const [viewState, setViewState] = useState({
+    longitude: Number(surveys[0].centerX),
+    latitude: Number(surveys[0].centerY),
+    zoom: 1,
+  });
+
+  const mapRef = useRef<mapboxgl.Map>(null);
 
   const debouncedQuery = useDebounce<string>(query, 500);
 
@@ -91,6 +98,9 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
     setPage(0);
   };
 
+  const handleChangeMapMarker = (survey: Survey) => {
+    handleFlyTo(survey.centerX, survey.centerY, mapRef);
+  };
   const totalArea = getTotalArea(surveys);
   const currentTotalArea = getTotalArea(filteredSurveys);
 
@@ -135,8 +145,12 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {visibleRows.map((survey) => (
-                <TableRowComponent survey={survey} key={`${survey.entryId}`} />
+              {visibleRows.map((survey, i) => (
+                <TableRowComponent
+                  survey={survey}
+                  key={`${survey.entryId}-${i}`}
+                  handleChangeMapMarker={handleChangeMapMarker}
+                />
               ))}
             </TableBody>
             <TablePagination
@@ -151,6 +165,9 @@ export const SurveyTable: FunctionComponent<IProps> = ({ surveys }) => {
         </TableContainer>
       </Grid>
       <TotalSurveyAreaView
+        mapRef={mapRef}
+        setViewState={setViewState}
+        {...viewState}
         totalArea={totalArea}
         currentTotalArea={currentTotalArea}
         surveys={surveys}

@@ -6,9 +6,13 @@ import { StyledTableCell } from './SurveyTable';
 
 interface IProps {
   survey: Survey;
+  handleChangeMapMarker: (survey: Survey) => void;
 }
-export const TableRowComponent: FunctionComponent<IProps> = ({ survey }) => (
-  <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+export const TableRowComponent: FunctionComponent<IProps> = ({ survey, handleChangeMapMarker }) => (
+  <TableRow
+    onClick={() => handleChangeMapMarker(survey)}
+    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+  >
     <StyledTableCell>{survey.entryId}</StyledTableCell>
     <StyledTableCell>{survey.platformId}</StyledTableCell>
     <StyledTableCell>{survey.created}</StyledTableCell>
