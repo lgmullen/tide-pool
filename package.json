@@ -1,16 +1,16 @@
 {
+  "homepage": "https://lgmullen.github.io/tide-pool",
   "name": "tide-pool",
   "description": "BRX Sandbox",
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "homepage": "http://lgmullen.github.io/tide-pool",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
